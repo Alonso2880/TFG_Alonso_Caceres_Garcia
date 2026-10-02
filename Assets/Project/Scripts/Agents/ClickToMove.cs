@@ -21,17 +21,22 @@ public class ClickToMove : MonoBehaviour
         {
             Ray ray = camara.ScreenPointToRay(Input.mousePosition); //Creamos un ray que hace que obtenga las coordenadas donde ha pulsado el raton. Con camara.ScreenPointToRay se lanza un rayo en 3D para averiguar esa posicion
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 200f)) //Comprueba si el raycast ha chocado con algo de la escena. RaycastHit guarda informacion en hit sobre lo que ha golpeado y 200 es la distancia maxima del raycast
+            if (Physics.Raycast(ray, out RaycastHit hit, 500f, Physics.AllLayers)) //Comprueba si el raycast ha chocado con algo de la escena. RaycastHit guarda informacion en hit sobre lo que ha golpeado y 200 es la distancia maxima del raycast
             {
-                if(NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f , NavMesh.AllAreas)) //A partir del punto donde se hizo clic, busca un punto del NavMesh a una distancia maxima de 2 unidades, si lo hace lo aguarda en navHit
+
+                if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f , NavMesh.AllAreas)) //A partir del punto donde se hizo clic, busca un punto del NavMesh a una distancia maxima de 2 unidades, si lo hace lo aguarda en navHit
                 {
-                    Debug.Log("Navegando al destiono");
+
                     agent.SetDestination(navHit.position); //le da un destino al agente
                 }
                 else
                 {
                     Debug.Log("Destino inalcanzable");
                 }
+            }
+            else
+            {
+                Debug.Log("No he golpeado nada");
             }
         }
     }
