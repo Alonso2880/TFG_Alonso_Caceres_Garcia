@@ -1415,13 +1415,33 @@ PrefabInstance:
       propertyPath: camara
       value: 
       objectReference: {fileID: 44023215}
+    - target: {fileID: 173777771074755694, guid: cf9d672bc71b38041a7dc7129c531af1, type: 3}
+      propertyPath: sueloLayer.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     - target: {fileID: 3468073844539493016, guid: cf9d672bc71b38041a7dc7129c531af1, type: 3}
       propertyPath: m_Speed
-      value: 100
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468073844539493016, guid: cf9d672bc71b38041a7dc7129c531af1, type: 3}
+      propertyPath: m_AngularSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 3468073844539493016, guid: cf9d672bc71b38041a7dc7129c531af1, type: 3}
+      propertyPath: m_StoppingDistance
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 4619424888913282779, guid: cf9d672bc71b38041a7dc7129c531af1, type: 3}
       propertyPath: m_Name
       value: Agente
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659998136906003423, guid: cf9d672bc71b38041a7dc7129c531af1, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4659998136906003423, guid: cf9d672bc71b38041a7dc7129c531af1, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8929836951142546501, guid: cf9d672bc71b38041a7dc7129c531af1, type: 3}
       propertyPath: m_LocalPosition.x

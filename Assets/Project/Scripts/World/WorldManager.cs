@@ -51,7 +51,7 @@ public class WorldManager : MonoBehaviour
             }
         }
 
-        Debug.Log("index lake " + index);
+        //Debug.Log("index lake " + index);
 
         //Bayas Azules
         for (int i = 0; i < BlueBerries.Count; i++)
@@ -69,7 +69,7 @@ public class WorldManager : MonoBehaviour
             }
         }
 
-        Debug.Log("index blue " + index);
+        //Debug.Log("index blue " + index);
 
         //Bayas Rojas
         for (int i = 0; i < RedBerries.Count; i++)
@@ -87,7 +87,7 @@ public class WorldManager : MonoBehaviour
             }
         }
 
-        Debug.Log("index red " + index);
+        //Debug.Log("index red " + index);
     }
 
 

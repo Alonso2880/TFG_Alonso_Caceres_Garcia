@@ -1,33 +1,45 @@
+using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
 /*
- Este script es temporal para mover el cubo de una punta a otra de acuerdo lo que pone en la semana 3
+ Este script permite mover el cubo haciendo click
+ sobre el suelo utilizando un NavMeshAgent.
  */
 
 public class ClickToMove : MonoBehaviour
 {
     private NavMeshAgent agent;
+
     public Camera camara;
+
+    public LayerMask sueloLayer;
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+
+        agent.angularSpeed = 700f;
+
+        agent.acceleration = 500f;
+
+        agent.stoppingDistance = 0.1f;
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0)) //Obtiene el boton izquierdo del raton
+        if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = camara.ScreenPointToRay(Input.mousePosition); //Creamos un ray que hace que obtenga las coordenadas donde ha pulsado el raton. Con camara.ScreenPointToRay se lanza un rayo en 3D para averiguar esa posicion
 
-            if (Physics.Raycast(ray, out RaycastHit hit, 500f, Physics.AllLayers)) //Comprueba si el raycast ha chocado con algo de la escena. RaycastHit guarda informacion en hit sobre lo que ha golpeado y 200 es la distancia maxima del raycast
+            Ray ray = camara.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, 500f, sueloLayer))
             {
-
-                if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f , NavMesh.AllAreas)) //A partir del punto donde se hizo clic, busca un punto del NavMesh a una distancia maxima de 2 unidades, si lo hace lo aguarda en navHit
+                if (NavMesh.SamplePosition(hit.point, out NavMeshHit navHit, 2f, NavMesh.AllAreas))
                 {
 
-                    agent.SetDestination(navHit.position); //le da un destino al agente
+                    agent.SetDestination(navHit.position);
                 }
                 else
                 {
@@ -36,7 +48,7 @@ public class ClickToMove : MonoBehaviour
             }
             else
             {
-                Debug.Log("No he golpeado nada");
+                Debug.Log("No he golpeado el suelo");
             }
         }
     }
