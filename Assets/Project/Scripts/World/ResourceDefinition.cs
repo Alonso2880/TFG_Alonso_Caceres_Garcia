@@ -1,6 +1,8 @@
 using UnityEngine;
 
-public enum ResourceKind {Water, Food, Material }
+public enum ResourceKind {Water, Food, Material, Mineral }
+public enum DisciplineC1 {None, Collector, Hunt}
+public enum DisciplineC2 {None, Agriculture, AnimalBreeding, Construction, Miner, Agriculture_Leader, AnimalBreeding_Leader, Miner_Leader}
 
 [CreateAssetMenu(fileName = "ResourceDefinition", menuName = "TFG/ResourceDefinition")]
 public class ResourceDefinition : ScriptableObject
