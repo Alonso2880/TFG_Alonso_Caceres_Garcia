@@ -7,6 +7,8 @@ public class ResourceNode : MonoBehaviour
     public float amountLeft;
     public bool IsDepleted = false;
 
+    public int ID;
+
     public event Action<ResourceNode> ResourceConsumed;
     public void Consume()
     {

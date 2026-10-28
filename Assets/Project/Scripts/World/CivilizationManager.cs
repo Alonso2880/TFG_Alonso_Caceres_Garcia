@@ -5,9 +5,18 @@ using System.Collections.Generic;
 //Sistema que se encarga de crear, gestionar y destruir las civilzaciones
 public class CivilizationManager : MonoBehaviour
 {
-    private List<CivilizationContext> civilizations = new List<CivilizationContext>();
+    [SerializeField] public List<CivilizationContext> civilizations = new List<CivilizationContext>();
 
-    //Funcion que se encarga de crear un acivilizacion
+    private int CivId = 1; //ID que sera usado en la siguiente civiliacion
+
+    //Funcion que da la orden de crear una civilizacion
+    public void CreateCiv()
+    {
+        CreateCivilization(CivId); //Llamo al metodo para crear la civilizacion
+        CivId++; //Aumento el ID para la siguiente civilizacion
+    }
+
+    //Funcion que se encarga de crear un civilizacion
     public CivilizationContext CreateCivilization(int id)
     {
         CivilizationContext civilization = new CivilizationContext(id);

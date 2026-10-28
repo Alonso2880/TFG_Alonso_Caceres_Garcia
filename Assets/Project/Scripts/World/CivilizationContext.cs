@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //Objeto que tiene la informacion principal de cada civilizacion
+[System.Serializable]
 public class CivilizationContext
 {
     public int Civid; //Identificador de la poblacion

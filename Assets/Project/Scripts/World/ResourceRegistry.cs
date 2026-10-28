@@ -6,6 +6,8 @@ using UnityEngine;
 public class ResourceRegistry : MonoBehaviour
 {
     public List<GameObject> Nodes = new List<GameObject>();
+
+    private int id = 1;
     void Start()
     {
         StartCoroutine("Delay");
@@ -25,9 +27,12 @@ public class ResourceRegistry : MonoBehaviour
     private void SearchNodesInGame()
     {
         ResourceNode[] founded = FindObjectsByType<ResourceNode>(FindObjectsSortMode.None); //Busca todos los objetos que contienen ResourceNode y no los ordena en un orden en especifico
+        
 
         for(int i =0; i < founded.Length; i++)
         {
+            founded[i].ID = id;
+            id++;
             Nodes.Add(founded[i].gameObject);
         }
     }

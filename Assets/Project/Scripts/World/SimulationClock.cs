@@ -21,6 +21,7 @@ public class SimulationClock : MonoBehaviour
     public event Action<float> OnSimulationTick;
 
     private float accumulatedTime; //Tiempo acumulado desde el ultimo tick
+    public float TotalSimulatedTime; //Tiempo total en la simulacion
 
     private void Update()
     {
@@ -29,6 +30,7 @@ public class SimulationClock : MonoBehaviour
 
         //Tiempo real transcurrido, convertido a tiempo simulado
         accumulatedTime += Time.deltaTime * SimulationSpeed;
+        TotalSimulatedTime += Time.deltaTime * SimulationSpeed;
 
         while(accumulatedTime >= tickInterval)
         {

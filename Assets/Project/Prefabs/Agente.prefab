@@ -27,6 +27,8 @@ GameObject:
   - component: {fileID: 4107191884462689103}
   - component: {fileID: 8353590871715911845}
   - component: {fileID: 4659998136906003423}
+  - component: {fileID: 6680476802531794425}
+  - component: {fileID: 1447740653106911267}
   m_Layer: 7
   m_Name: Agente
   m_TagString: Untagged
@@ -162,6 +164,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   camara: {fileID: 0}
+  sueloLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &8271697054393000238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186,10 +191,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d22cd22dc4383d74fb3020f81831c02f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AgentsNeeds
-  Hunger: 80
-  Thirst: 80
-  Health: 80
-  Energy: 80
+  Hunger: 0
+  Thirst: 0
+  Health: 1
+  Energy: 1
 --- !u!114 &1477439195539757697
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -202,6 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49d63173764251f439f438cea3ea061f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AgentTraits
+  Curiosity: 0
+  Sociability: 0
+  Caution: 0
+  Lazyness: 0
 --- !u!114 &491562091423546084
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,3 +354,34 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &6680476802531794425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619424888913282779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f466f2b1d92e9cc4f9a7afeac48d4684, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Character
+  needs: {fileID: 3583303834456600658}
+  traits: {fileID: 1477439195539757697}
+  life: {fileID: 1447740653106911267}
+  currentRole: {fileID: 0}
+--- !u!114 &1447740653106911267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619424888913282779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9cf767cf8d68fe4594417ea9085da51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentLife
+  needs: {fileID: 0}
+  edad: 1
+  lifeSpan: 85

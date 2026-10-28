@@ -1,16 +1,6 @@
 using UnityEngine;
 
-public class CharacterRole : MonoBehaviour
+public abstract class CharacterRole : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public abstract void PerformAction(); //Definir accion en las clases que hereden de esta, LiderRole, SubLieaderRole y CitizenRole
 }
