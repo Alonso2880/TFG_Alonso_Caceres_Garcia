@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 
+[Serializable]
 public sealed class Belief
 {
     public int subjectId; //ID del lugar

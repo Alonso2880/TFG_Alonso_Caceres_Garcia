@@ -35,6 +35,9 @@ public class SimulationManager : MonoBehaviour
     [SerializeField]
     private List<AgentPerception> agentPerceptionsSystem = new();
 
+    [SerializeField]
+    private List<AgentContext> agentContextSystem = new();
+
 
 
 
@@ -90,6 +93,15 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
+    //Registra agente con AgentContext de manera automatica
+    public void RegisterAgentContext(AgentContext context)
+    {
+        if (context != null && !agentContextSystem.Contains(context))
+        {
+            agentContextSystem.Add(context);
+        }
+    }
+
     //Desregistra el agente
     public void UnregisterAgentNeed(AgentsNeeds needs)
     {
@@ -110,6 +122,7 @@ public class SimulationManager : MonoBehaviour
         TickAgentsNeed(agentsNeedsSystem, deltaTime);
         TickAgentsLife(agentsLifeSystem, deltaTime);
         TickAgentPerceptions(agentPerceptionsSystem, deltaTime);
+        TickAgentContext(agentContextSystem, deltaTime);
 
     }
 
@@ -170,6 +183,23 @@ public class SimulationManager : MonoBehaviour
     private void TickAgentPerceptions(List<AgentPerception> perception, float deltaTime)
     {
         foreach (AgentPerception system in perception)
+        {
+            if (system == null)
+                continue;
+
+            if (system is ISimulationTickable tickable)
+            {
+                tickable.SimulationTick(deltaTime);
+            }
+            else
+            {
+                Debug.LogWarning($"Sistema {system.name} no implementa ISimulationTickable.");
+            }
+        }
+    }
+    private void TickAgentContext(List<AgentContext> context, float deltaTime)
+    {
+        foreach (AgentContext system in context)
         {
             if (system == null)
                 continue;

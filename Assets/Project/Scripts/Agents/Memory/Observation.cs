@@ -11,6 +11,7 @@ public struct Observation
 {
     public int entityID; //Nodo observado
     public string resourceTypeID; //Tipo del nodo
+    public string resourceType; //Indica el tipo del recurso (comida, agua...)
     public Vector3 position; //Posicion del nodo
     public float percivedQuantity; //Cantidad que percibe 
     public PercivedQuality percivedQuality; //Calidad, true para una buena calidad, false para las venenosas

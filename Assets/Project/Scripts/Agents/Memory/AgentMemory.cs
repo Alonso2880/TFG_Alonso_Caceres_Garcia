@@ -28,6 +28,15 @@ public sealed class AgentMemory : MonoBehaviour
     //Diccionario que guarda informacion sobre los recursos que conoce el agente
     private readonly Dictionary<int, ResourceKnowledge> resourceKnowledge = new Dictionary<int, ResourceKnowledge>(); //Diccionar que guarda informacion sobre los recursos que el agente conoce
 
+    [Header("Debug - Beliefs")]
+    [SerializeField]
+    private List<Belief> debugBeliefs = new List<Belief>();
+
+    [Header("Debug - Resource Knowledge")]
+    [SerializeField]
+    private List<ResourceKnowledge> debugResources =
+        new List<ResourceKnowledge>();
+
     private void Start()
     {
         character = this.gameObject.GetComponent<Character>();
@@ -59,6 +68,7 @@ public sealed class AgentMemory : MonoBehaviour
         resource.resourceID = observation.entityID; //ID del recurso
         resource.estimaedQuantity = observation.percivedQuantity; //Cantidad del recurso
         resource.lastObersvationTime = observation.simulationTime; //Cuando se vio el recurso
+        resource.type = observation.resourceType;//Asigna el tipo del nodo
 
         //Recuperar o crear la creencia
         Belief resourceBelief = GetorCreateBelief(observation.entityID, BeliefKind.Location);
@@ -80,6 +90,8 @@ public sealed class AgentMemory : MonoBehaviour
 
         resourceBelief.confidence = Mathf.Clamp01(resourceBelief.confidence); //Normalizamos el valor y hacemos que nunca sea ni 0 ni superior a 1
         resourceBelief.evidenceCount++; //Aumentamos en uno el numero de evidencias
+
+        RefreshDebugView();
 
         return true;
     }
@@ -143,6 +155,8 @@ public sealed class AgentMemory : MonoBehaviour
         belief.sourceAgentId = sourceAgentId; //Guarda el agente que dio la informacion
 
         belief.evidenceCount++; //Aumenta la evidencia
+
+        RefreshDebugView();
     }
 
 
@@ -169,5 +183,23 @@ public sealed class AgentMemory : MonoBehaviour
     public IEnumerable<ResourceKnowledge> GetKnownResources()
     {
         return resourceKnowledge.Values;
+    }
+
+
+    [ContextMenu("Refresh Memory Debug")]
+    public void RefreshDebugView()
+    {
+        debugBeliefs.Clear();
+        debugResources.Clear();
+
+        foreach (var belief in GetAllBeliefs())
+        {
+            debugBeliefs.Add(belief);
+        }
+
+        foreach (var resource in GetKnownResources())
+        {
+            debugResources.Add(resource);
+        }
     }
 }

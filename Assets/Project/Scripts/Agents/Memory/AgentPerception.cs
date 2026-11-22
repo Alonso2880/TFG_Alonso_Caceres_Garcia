@@ -19,6 +19,10 @@ public class AgentPerception : MonoBehaviour, ISimulationTickable
     [Header("Reference to SimulationClock")]
     private SimulationClock simulationClock;
 
+    [Header("Agent Memory")]
+    [SerializeField]
+    private AgentMemory memory;
+
     private ResourceRegistry resourceRegistry;
     private SimulationManager simulationManager;
 
@@ -26,6 +30,7 @@ public class AgentPerception : MonoBehaviour, ISimulationTickable
     {
         resourceRegistry = FindAnyObjectByType<ResourceRegistry>(); //Encuentro ResourceRegistry y lo asigno
         simulationClock = FindAnyObjectByType<SimulationClock>(); //Encuentro SimulationClock y lo asigno
+        memory = this.gameObject.GetComponent<AgentMemory>(); //Asigno el componente Agent Memory
     }
 
     //Se registra este componente en SimulationManager
@@ -64,7 +69,7 @@ public class AgentPerception : MonoBehaviour, ISimulationTickable
 
             //Debug.Log("Nodo encontrado " + nodes + " distancia " + distancia);
 
-            //Si la distancia es menor, se annade el objeto a la lista de objestos observados
+            //Si la distancia es menor, se annade el objeto a la lista de objetos observados
             if(distancia <= perceptionRadius)
             {
                 if (!objectsObserved.Contains(nodes))
@@ -91,10 +96,13 @@ public class AgentPerception : MonoBehaviour, ISimulationTickable
 
         newObservation.entityID = resourceNode.ID; //Asigno el ID del recurso
         newObservation.resourceTypeID = resourceNode.Definition.name; //Asigno el nombre del recurso
+        newObservation.resourceType = resourceNode.type; //Asigno el tipo del nodo
         newObservation.position = nodes.transform.position; //Asigno la posicion donde se encuentra el nodo
         //No podemos annadir la cantidad debido a que no esta tocando el objeto
         newObservation.percivedQuality = PercivedQuality.Unkown; //Como esta observacion es desde lejos ponemos Unkown ya que el agente desconoce ahora mismo si es tocixo o no
         newObservation.simulationTime = simulationClock.TotalSimulatedTime; //Asigno cuando se ha encontrado con este recurso
+
+        memory.ProcessObservation(newObservation);
 
         return newObservation;
     }

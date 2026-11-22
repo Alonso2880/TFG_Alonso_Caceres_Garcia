@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 491562091423546084}
   - component: {fileID: 2639898902949825075}
   - component: {fileID: 3419217557261577012}
-  - component: {fileID: 8097582697957266607}
   - component: {fileID: 7450307398090434507}
   - component: {fileID: 6315287754314981976}
   - component: {fileID: 4645370284681712517}
@@ -29,6 +28,8 @@ GameObject:
   - component: {fileID: 4659998136906003423}
   - component: {fileID: 6680476802531794425}
   - component: {fileID: 1447740653106911267}
+  - component: {fileID: 5844322098264761266}
+  - component: {fileID: 7099483211931504010}
   m_Layer: 7
   m_Name: Agente
   m_TagString: Untagged
@@ -223,6 +224,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e3c009f39e492248ac33c9ae03ce14a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AgentPerception
+  observation:
+    entityID: 0
+    resourceTypeID: 
+    position: {x: 0, y: 0, z: 0}
+    percivedQuantity: 0
+    percivedQuality: 0
+    simulationTime: 0
+  observationsList: []
+  objectsObserved: []
+  memory: {fileID: 2639898902949825075}
 --- !u!114 &2639898902949825075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -235,6 +246,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9d0124f6a60f184e8e213cc7040c799, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AgentMemory
+  initialObservationConfidence: 0.5
+  directObervationGain: 0.1
+  indirectObservationGain: 0.05
+  leaderObservationGain: 0.3
+  debugBeliefs: []
+  debugResources: []
 --- !u!114 &3419217557261577012
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,18 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dee52ddd8de9034fbfcd9d2af76a9c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AgentTrust
---- !u!114 &8097582697957266607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4619424888913282779}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f92183311e419bd40905525dc85a0eab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UtilityBrain
 --- !u!114 &7450307398090434507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -385,3 +390,32 @@ MonoBehaviour:
   needs: {fileID: 0}
   edad: 1
   lifeSpan: 85
+--- !u!114 &5844322098264761266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619424888913282779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd204380452834145840d317eacafc34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UtilityBrain
+--- !u!114 &7099483211931504010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4619424888913282779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc34e98c08e8a814e9c24db6385003eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentContext
+  agentNeeds: {fileID: 3583303834456600658}
+  agentTraits: {fileID: 1477439195539757697}
+  agentPerception: {fileID: 491562091423546084}
+  agentMemory: {fileID: 2639898902949825075}
+  competenceSystem: {fileID: 4645370284681712517}

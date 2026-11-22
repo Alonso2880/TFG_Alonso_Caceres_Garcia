@@ -11,4 +11,5 @@ public sealed class ResourceKnowledge
     public int resourceID; //ID del recurso
     public float estimaedQuantity; //Cantidad del recurso que el agente observo que quedaba la ultima vez
     public double lastObersvationTime; //Cuando se observo por ultima vez
+    public string type; //Tipo del recurso
 }

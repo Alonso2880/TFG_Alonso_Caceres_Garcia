@@ -47,7 +47,7 @@ public class AgentsNeeds : MonoBehaviour, ISimulationTickable
         }
         else
         {
-            Debug.LogError("No se ha encontrado SimulationManager");
+            Debug.LogError("No se ha encontrado SimulationNeeds");
         }
     }
 
