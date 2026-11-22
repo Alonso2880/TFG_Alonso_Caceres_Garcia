@@ -19,6 +19,7 @@ public class EatGoal : IUtilityGoal
 
     public GoalType Type => GoalType.Eat;
 
+    //Funcion para calcular la puntuacion
     public float Score (AgentContext context)
     {
         //Reiniciamos el candidato en cada evaluacion
@@ -64,9 +65,10 @@ public class EatGoal : IUtilityGoal
         return bestScore;
     }
 
+    //Funcion que comprueba si tiene sentido que el agente se plante comer ahora mismo
     public bool IsValid(AgentContext context)
     {
-        return true;
+        return context.hunger >= 0.5;
     }
 
     //Funcion para calcular la distancia

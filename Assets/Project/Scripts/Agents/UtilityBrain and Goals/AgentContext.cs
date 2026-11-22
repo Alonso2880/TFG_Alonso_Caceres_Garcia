@@ -10,7 +10,7 @@ public class AgentContext : MonoBehaviour, ISimulationTickable
 {
     [Header("Referencias componentes agente")]
     [SerializeField] private AgentsNeeds agentNeeds;
-    [SerializeField] private AgentTraits agentTraits;
+    [SerializeField] public AgentTraits agentTraits;
     [SerializeField] private AgentPerception agentPerception;
     [SerializeField] private AgentMemory agentMemory;
     [SerializeField] private CompetenceSystem competenceSystem;
