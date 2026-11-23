@@ -38,6 +38,9 @@ public class SimulationManager : MonoBehaviour
     [SerializeField]
     private List<AgentContext> agentContextSystem = new();
 
+    [SerializeField]
+    private List<UtilityBrain> UtilityBrainSystem = new();
+
 
 
 
@@ -102,6 +105,15 @@ public class SimulationManager : MonoBehaviour
         }
     }
 
+    //Registra agente con UtilityBrain de manera automatica
+    public void RegisterUtilityBrain (UtilityBrain utility)
+    {
+        if (utility != null && !UtilityBrainSystem.Contains(utility))
+        {
+            UtilityBrainSystem.Add(utility);
+        }
+    }
+
     //Desregistra el agente
     public void UnregisterAgentNeed(AgentsNeeds needs)
     {
@@ -123,6 +135,7 @@ public class SimulationManager : MonoBehaviour
         TickAgentsLife(agentsLifeSystem, deltaTime);
         TickAgentPerceptions(agentPerceptionsSystem, deltaTime);
         TickAgentContext(agentContextSystem, deltaTime);
+        TickUtilityBrain(UtilityBrainSystem, deltaTime);
 
     }
 
@@ -200,6 +213,24 @@ public class SimulationManager : MonoBehaviour
     private void TickAgentContext(List<AgentContext> context, float deltaTime)
     {
         foreach (AgentContext system in context)
+        {
+            if (system == null)
+                continue;
+
+            if (system is ISimulationTickable tickable)
+            {
+                tickable.SimulationTick(deltaTime);
+            }
+            else
+            {
+                Debug.LogWarning($"Sistema {system.name} no implementa ISimulationTickable.");
+            }
+        }
+    }
+
+    private void TickUtilityBrain(List<UtilityBrain> utility, float deltaTime)
+    {
+        foreach (UtilityBrain system in utility)
         {
             if (system == null)
                 continue;

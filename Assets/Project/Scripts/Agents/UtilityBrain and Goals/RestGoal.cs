@@ -52,4 +52,12 @@ public class RestGoal : IUtilityGoal
 
         return weightLazyness;
     }
+
+    public ActionRequest BuildRequest(AgentContext context)
+    {
+        return new ActionRequest
+        {
+            Goal = GoalType.Rest,
+        };
+    }
 }

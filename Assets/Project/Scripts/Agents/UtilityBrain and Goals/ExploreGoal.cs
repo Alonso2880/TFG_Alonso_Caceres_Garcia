@@ -47,4 +47,12 @@ public class ExploreGoal : IUtilityGoal
         return weightCuriosity;
     }
 
+    public ActionRequest BuildRequest(AgentContext context)
+    {
+        return new ActionRequest
+        {
+            Goal = GoalType.Explore,
+        };
+    }
+
 }

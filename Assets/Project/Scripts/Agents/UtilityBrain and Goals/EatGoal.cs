@@ -80,4 +80,14 @@ public class EatGoal : IUtilityGoal
 
         return 1f - Mathf.Clamp01(distancia / maxUsefulDistance); //Devuelve un valor normalizado de manera que esta mas cerca de 1 los recursos mas cercanos. Mas alla de 100 metros el valor es 0
     }
+
+    public ActionRequest BuildRequest(AgentContext context)
+    {
+        return new ActionRequest
+        {
+            Goal = GoalType.Eat,
+            ResourceID = bestResourceId,
+            TargetPosition = bestResourcePosition
+        };
+    }
 }

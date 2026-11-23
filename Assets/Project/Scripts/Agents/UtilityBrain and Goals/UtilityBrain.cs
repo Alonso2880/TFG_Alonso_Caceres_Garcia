@@ -1,3 +1,5 @@
+using NUnit.Framework;
+using System.Collections.Generic;
 using UnityEngine;
 /*
 Terminos:
@@ -28,17 +30,51 @@ Agente en Unity
 
 
 
-public class UtilityBrain : MonoBehaviour
+public class UtilityBrain : MonoBehaviour, ISimulationTickable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [Header("Referencias a sistemas")]
+    [SerializeField] private AgentContext context;
+    [SerializeField] private ActionController actionController;
+
+
+    private List<IUtilityGoal> goals = new List<IUtilityGoal>();
+
+    private void Awake()
     {
-        
+        goals.Add(new EatGoal());
+        goals.Add(new DrinkGoal());
+        goals.Add(new RestGoal());
+        goals.Add(new ExploreGoal());
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SimulationTick(float dt)
     {
-        
+        EvaluateGoals();
+    }
+
+    private void EvaluateGoals()
+    {
+        float bestScore = -1;
+        IUtilityGoal bestGoal = null;
+
+        foreach (IUtilityGoal goal in goals)
+        {
+            if (!goal.IsValid(context))
+                continue;
+            float score = goal.Score(context);
+
+            if(score > bestScore)
+            {
+                bestScore = score;
+                bestGoal = goal;
+            }
+        }
+
+        if (bestGoal == null)
+            return;
+
+        ActionRequest request = bestGoal.BuildRequest(context);
+
+        //actionController.ExecuteRequest(request);
     }
 }

@@ -6,15 +6,7 @@ using UnityEngine;
 
 public class ActionRequest : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public GoalType Goal;
+    public int ResourceID;
+    public Vector3 TargetPosition;
 }
